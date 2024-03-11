@@ -217,7 +217,7 @@ int main() {
  ppout.close();
  ppin.close();
  cout << "\n\t ЗАДАЧА 3.2  \n";
- ofstream pout("3.2.txt");
+ ofstream pout("3.2.bin");
  pout.write(Groups.Group, sizeof(Groups.Group));
  pout.write(Groups.Institute, sizeof(Groups.Institute));
  pout.write(Groups.Specialization, sizeof(Groups.Specialization));
@@ -231,7 +231,7 @@ int main() {
 
 
 
- ifstream pin("3.2.txt");
+ ifstream pin("3.2.bin");
 
 
  InfoStudent group;
