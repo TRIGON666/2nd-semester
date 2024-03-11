@@ -180,46 +180,83 @@ int main() {
     strcpy_s(Groups.Stud[1].FatherName, "Ильнарович");
     Groups.Stud[1].Age = 19;
 
-    //ofstream pout("group.txt");
-    //pout.write(Groups.Group, sizeof(Groups.Group));
-    //pout.write(Groups.Institute, sizeof(Groups.Institute));
-    //pout.write(Groups.Specialization, sizeof(Groups.Specialization));
-    //pout.write((char*)&Groups.countstudents, sizeof(Groups.countstudents));
-    //for (int i = 0; i < Groups.countstudents; i++) {
-    //    pout.write(Groups.Stud[i].SecondName, sizeof(Groups.Stud[i].SecondName));
-    //    pout.write(Groups.Stud[i].FirstName, sizeof(Groups.Stud[i].FirstName));
-    //    pout.write(Groups.Stud[i].FatherName, sizeof(Groups.Stud[i].FatherName));
-    //    pout.write((char*)&Groups.Stud[i].Age, sizeof(Groups.Stud[i].Age));
-    //}
+     cout << "\n\t ЗАДАЧА 3.1  \n";
+
+ InfoStudent Groups;
+
+ strcpy_s(Groups.Group, "09-341");
+ strcpy_s(Groups.Institute, "ICMIT");
+ strcpy_s(Groups.Specialization, "Информационная безопасность");
+ Groups.countstudents = 2;
+
+ strcpy_s(Groups.Stud[0].SecondName, "Бобошин");
+ strcpy_s(Groups.Stud[0].FirstName, "Иван");
+ strcpy_s(Groups.Stud[0].FatherName, "Сергеевич");
+ Groups.Stud[0].Age = 18;
+
+ strcpy_s(Groups.Stud[1].SecondName, "Сотруддинов");
+ strcpy_s(Groups.Stud[1].FirstName, "Нияз");
+ strcpy_s(Groups.Stud[1].FatherName, "Ильнарович");
+ Groups.Stud[1].Age = 19;
+
+ ofstream ppout("3.1.txt");
+ ppout.write(reinterpret_cast<char*>(&Groups), sizeof(InfoStudent));
+ 
+ ifstream ppin("3.1.txt");
+ InfoStudent gg;
+ ppin.read(reinterpret_cast<char*>(&gg), sizeof(InfoStudent));
+
+ cout << "Название группы: " << gg.Group << endl;
+ cout << "Институт: " << gg.Institute << endl;
+ cout << "Направление: " << gg.Specialization << endl;
+ cout << "Количество студентов: " << gg.countstudents << endl;
+
+ for (int i = 0; i < gg.countstudents; ++i) {
+     cout << "ФИО: " << gg.Stud[i].SecondName << " " << gg.Stud[i].FirstName << " " << gg.Stud[i].FatherName << ", Возраст: " << gg.Stud[i].Age << endl;
+ }
+ ppout.close();
+ ppin.close();
+ cout << "\n\t ЗАДАЧА 3.2  \n";
+ ofstream pout("3.2.txt");
+ pout.write(Groups.Group, sizeof(Groups.Group));
+ pout.write(Groups.Institute, sizeof(Groups.Institute));
+ pout.write(Groups.Specialization, sizeof(Groups.Specialization));
+ pout.write((char*)&Groups.countstudents, sizeof(int)*Groups.countstudents);
+ for (int i = 0; i < Groups.countstudents; i++) {
+     pout.write(Groups.Stud[i].SecondName, sizeof(Groups.Stud[i].SecondName));
+     pout.write(Groups.Stud[i].FirstName, sizeof(Groups.Stud[i].FirstName));
+     pout.write(Groups.Stud[i].FatherName, sizeof(Groups.Stud[i].FatherName));
+     pout.write((char*)&Groups.Stud[i].Age, sizeof(Groups.Stud[i].Age));
+ }
 
 
 
-    /*ifstream pin("group.txt");
+ ifstream pin("3.2.txt");
 
 
-    InfoStudent group;
-    pin.read(group.Group, sizeof(group.Group));
-    pin.read(group.Institute, sizeof(group.Institute));
-    pin.read(group.Specialization, sizeof(group.Specialization));
-    pin.read((char*)&group.countstudents, sizeof(group.countstudents));
-    for (int i = 0; i < group.countstudents; i++) {
-        pin.read(Groups.Stud[i].SecondName, sizeof(Groups.Stud[i].SecondName));
-        pin.read(Groups.Stud[i].FirstName, sizeof(Groups.Stud[i].FirstName));
-        pin.read(Groups.Stud[i].FatherName, sizeof(Groups.Stud[i].FatherName));
-        pin.read((char*)&Groups.Stud[i].Age, sizeof(Groups.Stud[i].Age));
-    }
+ InfoStudent group;
+ pin.read(group.Group, sizeof(group.Group));
+ pin.read(group.Institute, sizeof(group.Institute));
+ pin.read(group.Specialization, sizeof(group.Specialization));
+ pin.read((char*)&group.countstudents, sizeof(int)* group.countstudents);
+ for (int i = 0; i < group.countstudents; i++) {
+     pin.read(Groups.Stud[i].SecondName, sizeof(Groups.Stud[i].SecondName));
+     pin.read(Groups.Stud[i].FirstName, sizeof(Groups.Stud[i].FirstName));
+     pin.read(Groups.Stud[i].FatherName, sizeof(Groups.Stud[i].FatherName));
+     pin.read((char*)&Groups.Stud[i].Age, sizeof(Groups.Stud[i].Age));
+ }
 
 
 
-    cout << "Название группы: " << group.Group <<endl;
-    cout << "Институт: " << group.Institute << endl;
-    cout << "Направление: " << group.Specialization << endl;
-    cout << "Количество студентов: " << group.countstudents << endl;
+ //cout << "Название группы: " << group.Group <<endl;
+ //cout << "Институт: " << group.Institute << endl;
+ //cout << "Направление: " << group.Specialization << endl;
+ //cout << "Количество студентов: " << group.countstudents << endl;
 
-    for (int i = 0; i < group.countstudents; i++) {
-        cout << "  ФИО: " << group.Stud[i].SecondName  << " " << group.Stud[i].FirstName << group.Stud[i].FatherName << endl;
-        cout << "  Возраст: " << group.Stud[i].Age << endl;
-    }
-    pin.close();
-    pout.close();*/
+ //for (int i = 0; i < group.countstudents; i++) {
+ //    cout << "  ФИО: " << group.Stud[i].SecondName  << " " << group.Stud[i].FirstName << group.Stud[i].FatherName << endl;
+ //    cout << "  Возраст: " << group.Stud[i].Age << endl;
+ //}
+ pin.close();
+ pout.close();
 }
