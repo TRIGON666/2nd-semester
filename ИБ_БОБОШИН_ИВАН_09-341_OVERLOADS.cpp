@@ -149,7 +149,10 @@ public:
 	friend std::ostream& operator<<(std::ostream& out, const complexNumb& res) 
 	{
 		out << res.real;
-		out << " + " << res.imaginary << "i";
+		if (res.imaginary >= 0)
+			out << " + " << res.imaginary << "i";
+		else
+			out << res.imaginary << "i";
 		return out;
 	}
 
@@ -286,6 +289,7 @@ public:
 	{
 		out << res.n << "\n";
 		for (int i = res.n; i >= 0; i--) {
+			if (res.coeff[i] >= 0 && i!=res.n) out << "+";
 			if (i == 0)
 				out << res.coeff[i] << " ";
 			else
