@@ -6,7 +6,7 @@
 template<typename T>
 class MyStack {
 private:
-    class Node {
+    struct Node {
         T info;
         Node* next;
 
